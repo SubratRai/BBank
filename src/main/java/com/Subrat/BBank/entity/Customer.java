@@ -2,15 +2,11 @@ package com.Subrat.BBank.entity;
 
 import com.Subrat.BBank.enums.AccountType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.jspecify.annotations.NonNull;
-
-import javax.print.attribute.standard.DateTimeAtCreation;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Data
@@ -22,30 +18,34 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cutomer_id;
 
-    @NonNull
-    private String first_name;
+    @NotBlank
+    private String firstName;
 
-    private String last_name;
+    private String lastName;
 
-    @NonNull
-    private LocalDate date_of_birth;
+    @NotNull(message = "date of birth must be in past")
+    @Past
+    private LocalDate dateOfBirth;
 
-    @NonNull
+    @NotBlank
     private String gender;
 
-    @NonNull()
+    @NotBlank
+    @Email(message = "enter a valid email")
     private String email;
 
-    @NonNull
+    @NotNull
+    @Size(min = 10, max = 10)
+    @Column(nullable = false)
     private String phoneNumber;
 
-    @NonNull
+    @NotBlank
     private String address;
 
-    @NonNull
+    @NotBlank
     private String panNumber;
 
-    @NonNull
+    @NotBlank
     private String aadhaarNumber;
 
     @Enumerated(EnumType.STRING)

@@ -12,6 +12,7 @@ import java.util.Optional;
 @RequestMapping("customer/")
 public class CustomerController {
 
+    //this print method is just for test on webpage
     @GetMapping("y/")
     public String print(){
         return "printing";
@@ -23,7 +24,6 @@ public class CustomerController {
     @PostMapping()
     public Customer saveCustomer(@RequestBody Customer customer){
         return customerService.saveCustomer(customer);
-//       return "customer created successfully!";
     }
 
     @GetMapping()
@@ -31,13 +31,24 @@ public class CustomerController {
         return customerService.getCustomer();
     }
 
-    @GetMapping("getByAadhaar/")
-    public Optional<Customer> getByAadhaar(String Aadhaar){
-        return customerService.getCustomerByAadhaar(Aadhaar);
+    @GetMapping("aadhaarNumber/{aadhaarNumber}")
+    public Optional<Customer> getByAadhaarNumber(@PathVariable String aadhaarNumber){
+        return customerService.getCustomerByAadhaarNumber(aadhaarNumber);
+    }
+
+    @GetMapping("panNumber/{panNumber}")
+    public Optional<Customer> getByPanNumber(@PathVariable String panNumber){
+        return customerService.getCustomerByPanNumber(panNumber);
+    }
+
+    @GetMapping("first_name/{firstName}")
+    public List<Customer> getByFirstName(@PathVariable String firstName){
+        return customerService.getCustomerByFirstName(firstName);
     }
 
     @DeleteMapping("delete/{id}")
     public void deleteCustomer(@PathVariable Long id){
-        customerService.deleteCustomer(id);
+                customerService.deleteCustomer(id);
     }
+
 }
