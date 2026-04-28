@@ -4,6 +4,10 @@ WORKDIR /app
 
 COPY . .
 
+# 👇 GIVE EXECUTE PERMISSION
+RUN chmod +x mvnw
+
+# 👇 NOW BUILD
 RUN ./mvnw clean package -DskipTests
 
 EXPOSE 8080
