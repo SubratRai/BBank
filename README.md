@@ -75,8 +75,8 @@ src/main/java/com/subrat/bbank
 ### Register (Customer)
 ```json
 {
-  "name": "John Doe",
-  "email": "john@example.com",
+  "name": "Subrat Rai",
+  "email": "subrat@example.com",
   "password": "Password@123",
   "role": "CUSTOMER"
 }
@@ -95,7 +95,7 @@ src/main/java/com/subrat/bbank
 ### Login
 ```json
 {
-  "email": "john@example.com",
+  "email": "subrat@example.com",
   "password": "Password@123"
 }
 ```
@@ -125,7 +125,7 @@ src/main/java/com/subrat/bbank
 ### Add Beneficiary
 ```json
 {
-  "name": "Alice",
+  "name": "adarsh rai",
   "accountNumber": "9988776655",
   "bankName": "XYZ Bank"
 }
