@@ -1,61 +1,77 @@
-# BBank - Banking Application Backend
+# BBank
+
+Production-style banking backend built with Spring Boot, JWT authentication, role-based access control, and MySQL.
+
+## Why This Project Matters
+
+BBank is a backend-focused banking system that demonstrates how I design secure business applications with real workflows instead of only basic CRUD. It covers authentication, account operations, transaction handling, beneficiary management, and admin controls in a structured Spring Boot codebase.
+
+This is the kind of backend architecture I can build for fintech MVPs, internal finance tools, and business platforms that need security, auditability, and clean separation of concerns.
+
+## Core Features
+
+- User registration and login
+- JWT-based authentication and protected APIs
+- Role-based access for customer and admin flows
+- Account creation and account details lookup
+- Deposit and withdrawal operations
+- Fund transfer between accounts
+- Beneficiary creation and management
+- Transaction history retrieval
+- Admin account freeze control
+- Centralized exception handling and validation
 
 ## Tech Stack
+
 - Java 17
 - Spring Boot 3
-- Maven
-- MySQL
-- Spring Security + JWT
+- Spring Security
+- JWT
 - Spring Data JPA
-- Bean Validation
+- MySQL
+- Maven
+- Docker
 
-## Project Structure
-```
-src/main/java/com/subrat/bbank
-├── BBankApplication.java
-├── config
-│   └── SecurityConfig.java
-├── controller
-│   ├── AccountController.java
-│   ├── AdminController.java
-│   ├── AuthController.java
-│   └── BeneficiaryController.java
-├── dto
-├── entity
-├── enums
-├── exception
-│   ├── BadRequestException.java
-│   ├── GlobalExceptionHandler.java
-│   ├── ResourceNotFoundException.java
-│   └── UnauthorizedException.java
-├── repository
-├── security
-│   ├── CustomUserDetailsService.java
-│   └── JwtAuthenticationFilter.java
-├── service
-│   ├── AccountService.java
-│   ├── AdminService.java
-│   ├── AuthService.java
-│   ├── BeneficiaryService.java
-│   └── impl
-└── util
-    └── JwtUtil.java
-```
+## Architecture
 
-## Setup
-1. Create MySQL database (or let app auto-create): `bbank_db`.
-2. Update `src/main/resources/application.properties` if needed.
-3. Run application:
-```bash
-./mvnw spring-boot:run
-```
+The project follows a layered backend structure:
 
-## API Endpoints
-### Auth
+- `controller` for API endpoints
+- `service` and `service.impl` for business logic
+- `repository` for persistence access
+- `dto` for request and response contracts
+- `entity` for domain models
+- `security` for authentication and JWT filtering
+- `exception` for error handling
+
+This structure keeps the code maintainable and makes it easier to extend with new modules.
+
+## Business Workflows Implemented
+
+### Customer Flow
+
+- Register and log in
+- Create an account
+- Deposit and withdraw funds
+- Transfer money
+- View account and transaction details
+- Add beneficiaries
+
+### Admin Flow
+
+- View users
+- View accounts
+- Freeze accounts when needed
+
+## API Overview
+
+### Authentication
+
 - `POST /auth/register`
 - `POST /auth/login`
 
-### Customer
+### Accounts
+
 - `POST /accounts`
 - `GET /accounts`
 - `GET /accounts/{accountNumber}`
@@ -63,74 +79,48 @@ src/main/java/com/subrat/bbank
 - `POST /accounts/{accountNumber}/withdraw`
 - `POST /accounts/{accountNumber}/transfer`
 - `GET /accounts/{accountNumber}/transactions?page=0&size=10`
+
+### Beneficiaries
+
 - `POST /beneficiaries`
 - `GET /beneficiaries`
 
 ### Admin
+
 - `GET /admin/users`
 - `GET /admin/accounts`
 - `PATCH /admin/accounts/{accountNumber}/freeze`
 
-## Sample Postman Payloads
-### Register (Customer)
-```json
-{
-  "name": "Subrat Rai",
-  "email": "subrat@example.com",
-  "password": "Password@123",
-  "role": "CUSTOMER"
-}
+## Local Setup
+
+### Prerequisites
+
+- Java 17+
+- Maven
+- MySQL
+
+### Run the Project
+
+```bash
+git clone https://github.com/SubratRai/BBank.git
+cd BBank
+./mvnw spring-boot:run
 ```
 
-### Register (Admin)
-```json
-{
-  "name": "System Admin",
-  "email": "admin@example.com",
-  "password": "Admin@12345",
-  "role": "ADMIN"
-}
-```
+Update `src/main/resources/application.properties` with your local database configuration if required.
 
-### Login
-```json
-{
-  "email": "subrat@example.com",
-  "password": "Password@123"
-}
-```
+## Screenshots
 
-### Create Account
-```json
-{
-  "accountType": "SAVINGS"
-}
-```
+This repository already includes screenshots. If you want better client conversion, place the best 2 to 4 UI or API screenshots directly under this section with short captions.
 
-### Deposit/Withdraw
-```json
-{
-  "amount": 1500.00
-}
-```
+## What This Demonstrates To Clients
 
-### Transfer
-```json
-{
-  "destinationAccountNumber": "1234567890",
-  "amount": 200.00
-}
-```
+- Secure backend development
+- Spring Boot project organization
+- Authentication and authorization design
+- Financial workflow implementation
+- API-first application development
 
-### Add Beneficiary
-```json
-{
-  "name": "adarsh rai",
-  "accountNumber": "9988776655",
-  "bankName": "XYZ Bank"
-}
-```
+## Freelance Relevance
 
-## Database Schema
-- SQL schema file: `src/main/resources/schema.sql`
-- Auto DDL is enabled with `spring.jpa.hibernate.ddl-auto=update`
+If you need a backend for a banking workflow, wallet system, customer portal, or admin-controlled business application, this project is a good example of the kind of system I can build and extend.
